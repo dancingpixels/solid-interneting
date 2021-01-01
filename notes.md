@@ -103,7 +103,7 @@ The `em` unit is very useful for defining sizes relative to some base font. it s
 
 
 
-![em-units](4-hello-css/em-units.png)
+![em-units](images/em-units.png)
 
 ### Selecting multiple elements
 
@@ -188,5 +188,18 @@ An example of inline styling
 
 ## The Box Model
 
+> A friendly introduction to padding, borders, and margins.
+
 - The `CSS box model` is a set of rules that define how every web page on the Internet is rendered. 
 - CSS treats each element in your HTML document as a “box” with a bunch of different properties that determine where it appears on the page. 
+
+#### Block Elements and Inline Elements
+
+Each HTML element rendered on the screen is a box, and they come in two flavors: `block` boxes and `inline` boxes.
+
+![Diagram: comparison of block boxes with inline boxes](images/inline-vs-block-boxes.png)
+
+All the HTML elements have a default type of box:
+
+- `<h1>` and `<p>` are block-level elements,
+-  while `<em>` and `<strong>` are inline elements. 
