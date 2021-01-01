@@ -93,7 +93,7 @@ The `<`, `>`, and `&` characters are called “reserved characters” because th
 
 Entities always begin with an ampersand (`&`) and end with a semicolon (`;`). In between, you put a special code that your browser will interpret as a symbol. In this case, it interprets `lt`, `gt`, and `amp` as less-than, greater-than, and ampersand symbols, respectively.
 
-## CSS
+## Hello CSS
 
 ### Units of Measurement
 
@@ -188,3 +188,5 @@ An example of inline styling
 
 ## The Box Model
 
+- The `CSS box model` is a set of rules that define how every web page on the Internet is rendered. 
+- CSS treats each element in your HTML document as a “box” with a bunch of different properties that determine where it appears on the page. 
