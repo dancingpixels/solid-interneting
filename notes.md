@@ -72,7 +72,7 @@ There are 4 main image formats in use on the web.
 - GIF Images - `GIF`s are the go-to option for simple animations, but the trade off is that they’re somewhat limited in terms of color palette—never use them for photos.
 - GIF Images - `GIF`s are the go-to option for simple animations.
 - PNG Images - `PNG`s are great for anything that’s not a photo or animated. For photos, a `PNG` file of the same quality (as perceived the human eye) would generally be bigger than an equivalent `JPG` file. They are excellent fit for icons, technical diagrams, logos, etc.
-- SVG Images  - a vector-based graphics format, meaning it can scale up or down to *any* dimension without loss of quality. This property makes SVG images a wonderful tool for responsive design. 
+- SVG Images  - a vector-based graphics format, meaning it can scale up or down to *any* dimension without loss of quality. This property makes `SVG` images a wonderful tool for responsive design. 
 
 ### Image Dimensions
 
@@ -92,3 +92,99 @@ The `<`, `>`, and `&` characters are called “reserved characters” because th
 ```
 
 Entities always begin with an ampersand (`&`) and end with a semicolon (`;`). In between, you put a special code that your browser will interpret as a symbol. In this case, it interprets `lt`, `gt`, and `amp` as less-than, greater-than, and ampersand symbols, respectively.
+
+## CSS
+
+### Units of Measurement
+
+Many CSS properties require a unit of measurement. There are lots of unit measurement available, but the common are `px` pixel and `em` - pronounced like the letter _m_.
+
+The `em` unit is very useful for defining sizes relative to some base font. it scales the measurement up or down to match the base font defined.
+
+
+
+![em-units](4-hello-css/em-units.png)
+
+### Selecting multiple elements
+
+We can select multiple HTML elements in the same CSS rule by separating them with commas. 
+
+```css
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Helvetica", "Arial", sans-serif;
+}
+```
+
+### Defining Fonts
+
+`font-family` is a CSS property that defines the typeface for whatever element you selected. It accepts multiple values because not all users will have the same fonts installed. 
+
+```css
+font-family: "Helvetica", "Arial", sans-serif;
+```
+
+### List Styles
+
+The `list-style-type` property lets you alter the bullet icon used for `<li>` elements. You’ll typically want to define it on the parent `<ul>` or `<ol>` element:
+
+```css
+ul {
+  list-style-type: circle;
+}
+
+ol {
+  list-style-type: lower-roman;
+}
+```
+
+### Underlines
+
+The `text-decoration` property determines whether text is underlined or not. By setting it to `none`, we can remove the default underline from all of our links. 
+
+```css
+a {
+  text-decoration: none;
+}
+```
+
+### Font Weight and Styles
+
+The `font-weight` property defines the “boldness” of the text in an element, and the `font-style` property indicates whether it’s italicized or not.
+
+```css
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-weight: normal;                              
+}
+```
+
+### The Cascade
+
+The “cascading” part of CSS is due to the fact that rules cascade down from multiple sources.
+
+The CSS hierarchy for every web page is:
+
+5. The browser’s default stylesheet
+
+4. User-defined stylesheets
+
+3. External stylesheets (that’s us)
+
+2. Page-specific styles (that’s also us)
+
+1. Inline styles (that could be us, but it never should be)
+
+Styles defined in each subsequent step *override* previous ones.
+
+An example of inline styling
+
+```css
+<a href='nowhere.html'
+   style='color: #990000; text-decoration: line-through;'>obsolete link
+</a>
+```
+
+> Inline styles should be avoided at all costs because they make it impossible to alter styles from an external stylesheet. 
+
+## The Box Model
+
