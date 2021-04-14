@@ -51,7 +51,8 @@ They are best used for directing users to a new website.
 `Relative` links point to another file in your website from the vantage point of the file you’re editing. It’s implied that the scheme and domain name are the same as the current page, so the only thing you need to supply is the path.
 
 ```html
-<li> Relative links like to our <a href='misc/extras.html'>Extras page.</a> </li>
+<li> Relative links like to our <a href='misc/extras.html'>Extras page.</a> 
+</li>
 ```
 
 ### Root-Relative Links
@@ -160,19 +161,19 @@ h1, h2, h3, h4, h5, h6 {
 
 ### The Cascade
 
-The “cascading” part of CSS is due to the fact that rules cascade down from multiple sources.
+The `cascading` part of CSS is due to the fact that rules cascade down from multiple sources.
 
 The CSS hierarchy for every web page is:
 
-5. The browser’s default stylesheet
+- The browser's default stylesheet
 
-4. User-defined stylesheets
+- User-defined stylesheets
 
-3. External stylesheets (that’s us)
+- External stylesheets (that's us)
 
-2. Page-specific styles (that’s also us)
+- Page-specific styles (that's also us)
 
-1. Inline styles (that could be us, but it never should be)
+- Inline styles (that could be us, but it never should be)
 
 Styles defined in each subsequent step *override* previous ones.
 
@@ -193,7 +194,7 @@ An example of inline styling
 - The `CSS box model` is a set of rules that define how every web page on the Internet is rendered. 
 - CSS treats each element in your HTML document as a “box” with a bunch of different properties that determine where it appears on the page. 
 
-#### Block Elements and Inline Elements
+### Block Elements and Inline Elements
 
 Each HTML element rendered on the screen is a box, and they come in two flavors: `block` boxes and `inline` boxes.
 
@@ -203,3 +204,220 @@ All the HTML elements have a default type of box:
 
 - `<h1>` and `<p>` are block-level elements,
 -  while `<em>` and `<strong>` are inline elements. 
+
+### Block Elements
+
+- **Block boxes** always appear **below** the previous block element. This is the “natural” or “static” flow of an HTML  document when it gets rendered by a web browser.
+- The **width of block boxes** is set automatically based on the width of its parent container.
+  - In this case, our blocks are always the width of the browser window.
+- The default **height of block boxes** is based on the content it contains. 
+  - When you narrow the browser window, the height of block elements adjusts accordingly.
+
+### Inline Elements
+
+- **Inline boxes** don't affect **vertical spacing**. 
+  - They're not for determining layout—they're for styling stuff *inside* of a block.
+- The **width of inline boxes** is based on the content it contains, not the width of the parent element.
+
+### Changing Box behaviour
+
+We can override the default box type of HTML elements with the CSS `display ` property. For example, if we wanted to make our `<em>` and `<strong>` elements blocks instead of inline elements.
+
+```css
+em, strong {
+  display: block;
+}
+```
+
+This comes in handing when you are trying to turn `<a>` elements into buttons or format `<img>` elements - both of which are inline by default. 
+
+### Content, padding, border, and margin
+
+The `CSS box model` is a set of rules that determine the dimensions of every element in a web page. It gives each box (both inline and block) four properties:
+
+- **Content** – The text, image, or other media content in the element.
+- **Padding** – The space between the box's content and its border.
+- **Border** – The line between the box's padding and margin.
+- **Margin** – The space between the box and surrounding boxes.
+
+Together, this is everything a browser needs to render an element’s box. The `content` is the only property with semantic value - hence it's authored in HTML. The remaining properties are purely presentational, so they are defined by CSS.
+
+<img src="images/css-box-model.png" style="zoom:50%;" />
+
+### Padding
+
+The `padding` property defines the padding for the selected element:
+
+```css
+h1 {
+  padding: 50px;
+}
+```
+
+This adds 50 pixels to *each side* of the `<h1>` heading. 
+
+Sometimes you’ll only want to style one side of an element. For that, CSS provides the following properties:
+
+```css
+p {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+```
+
+You can use any unit for the padding of an element, not just pixels.
+
+CSS provides an alternative “shorthand” form of the `padding` property that lets you set the top/bottom and left/right padding with only one line of CSS. 
+
+- When you provide *two* values to the `padding` property, it's interpreted as the vertical and horizontal padding values, respectively.
+
+- This means that our previous rule can be rewritten as:
+
+  ```css
+  p {
+    padding: 20px 10px;  /* Vertical  Horizontal */
+  }
+  ```
+
+- Alternatively, if you provide *four* values, you can set the padding for each side of an element individually. The values are interpreted clockwise, starting at the top
+
+- ```css
+  p {
+    padding: 20px 0 20px 10px;  /* Top  Right  Bottom  Left */
+  }
+  ```
+
+### Borders
+
+- A line drawn around the content and padding of an element.
+- We set borders by defining the:
+  - size
+  - style, 
+  - color
+
+```css
+h1 {
+    border: 1px solid #5D6063;
+}
+```
+
+- Like `padding`, there are `-top`, `-bottom`, `-left`, and `-right` variants for the `border` property:
+
+```css
+border-bottom: 1px solid #5D6063;
+```
+
+
+
+> Borders are common design elements, but they're also invaluable for debugging. When you're not sure how a box is being rendered, add a `border: 1px solid red;` declaration to it. This will clearly show the box's padding, margin, and overall dimensions with just a single line of CSS. After you figured out why your stuff is broken, simply delete the rule.
+
+### Margins
+
+- Margins define the he space between a box and its surrounding boxes.
+- it also accepts the same shorthand formats as `padding`.
+
+```css
+p {
+  margin-bottom: 50px;         
+}
+```
+
+### Margins on Inline Elements
+
+One of the starkest contrasts between block-level elements and inline ones is their handling of margins. 
+
+- Inline boxes *completely ignore* the top and bottom margins of an element.
+
+The rationale behind this goes back to the fact that inline boxes format runs of text inside of a block, and thus have limited impact on the overall layout of a page.
+
+### Vertical Margin Collapse
+
+- When you have two boxes with vertical margins sitting right next to each other, they will collapse. 
+- Instead of adding the margins together,only the biggest one is displayed.
+
+```css
+p {
+  padding: 20px 0 20px 10px;
+
+  margin-top: 25px;
+  margin-bottom: 50px;
+}
+```
+
+- Each paragraph should have 50 pixels on the bottom, and 25 pixels on the top. That’s 75 pixels between our `<p>` elements, right? Wrong! There's still only going to be `50px` between them because the smaller top margin collapses into the bigger bottom one.
+
+  ![margin-collapse](images/vertical-margin-collapse.png)
+
+- To prevent the margins from collapsing. All you need to do is put another invisible element in between them:
+
+```css
+<p>...</p>
+<div></div>
+<p>...</p>
+```
+
+- The Flexbox layout scheme doesn't have collapsing margins, so this isn't really even an issue for modern websites.
+
+### Generic Boxes
+
+- There are many times when we need a generic box purely for the sake of styling a web page. This is what `<div>` and `<span>` are for.
+- Both `<div>` and `<span>` are “container” elements that don't have any affect on the semantic structure of an HTML document.
+- They provide a hook for adding CSS styles to arbitrary sections of a web page.
+  - Sometimes you need to add an invisible box to prevent a margin collapse
+  - You want to group the first few paragraphs of an article into a synopsis with slightly different text formatting.
+- `div` is for block level content
+- `span` is for inline content
+
+### Content Boxes and Border Boxes
+
+- The `width` and `height` properties only define the size of a box's *content*.
+- Its padding and border are both added *on top of* whatever explicit dimensions you set.
+- This is the default behavior, this is called `content-box`
+- CSS lets you change how the width of a box is calculated via the `box-sizing` property.
+
+```css
+ box-sizing: border-box; 
+```
+
+- This forces the actual width of the box to be `200px`—including padding and borders. Of course, this means that the content width is now determined automatically
+- Using `border-box` for all your boxes is considered a best practice among modern web developers.
+
+### Aligning Boxes
+
+There are 3 methods for horizontally aligning block-level elements:
+
+- `auto margins` for center alignment
+- `floats` for left right alignment
+- `flexbox` for complete control over alignment
+
+### Centering With Auto-Margins
+
+- When you set the left and right margin of a block-level element to `auto`, it will center the block in its parent element.
+
+```css
+div {
+     margin: 20px auto; /* Vertical  Horizontal */
+}
+```
+
+- This only works on blocks that have explicit widths defined on them.
+
+### Reseting Styles
+
+- Different browsers have different default styles for all of their HTML elements, making it difficult to create consistent stylesheets.
+- It is a  good idea to override default styles to a predictable value using the “universal” CSS selector (`*`).
+
+```css
+*  {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+```
+
+- This selector matches every HTML element, effectively resetting the `margin` and `padding` properties for our web page. 
+- It also converted all our boxes to `border-box` - which is a best practice.
+
+## CSS Selectors
