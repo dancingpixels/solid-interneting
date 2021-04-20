@@ -421,3 +421,125 @@ div {
 - It also converted all our boxes to `border-box` - which is a best practice.
 
 ## CSS Selectors
+
+- CSS selectors let us map a single CSS rule to a specific HTML element. 
+- This makes it possible to *selectively* style individual elements while ignoring others.
+- Types of selectors
+  - type selector
+  - class selector
+  - descendant selector
+  - pseudo-class selector
+  - ID selector
+
+### Class selectors
+
+- Class selectors let you apply CSS styles to a specific HTML element.
+- They let you differentiate between HTML elements of the same type
+- Class selectors require two things:
+  - A `class` attribute on the HTML element in question.
+  - A matching CSS class selector in your stylesheet.
+
+```html
+<p class='synopsis'>CSS selectors let you <em>select</em> individual HTML
+   elements in an HTML document. This is <strong>super</strong> useful.</p>
+```
+
+
+
+```css
+.synopsis {
+  color: #7E8184;        /* Light gray */
+  font-style: italic;
+}
+```
+
+- The same class can be applied to multiple elements in a single HTML document.
+- The order of the `class` attribute in our HTML element has no effect on override behavior.
+- When there's two conflicting properties in a CSS file, the last one is always the one that gets applied.
+
+### Descendant Selectors
+
+- They let you target only those elements that are *inside* of another element.
+
+```css
+.synopsis em {
+  font-style: normal;
+}
+```
+
+- Descendant selectors aren't limited to class selectors—you can combine any other group of selectors this way
+
+- If we wanted to select only `<em>` elements inside of headings, we might use something like this:
+
+  ```css
+  h1 em {
+    /* Some other styles */
+  }
+  ```
+
+### Pseudo-classes
+
+Pseudo-classes begin with a colon followed by the name of the desired class. The most common link pseudo-classes are as follows:
+
+- `:link` – A link the user has never visited.
+- `:visited` – A link the user has visited before.
+- `:hover` – A link with the user’s mouse over it.
+- `:active` – A link that’s being pressed down by a  mouse (or finger).
+
+```css
+a:link {
+  color: blue;
+  text-decoration: none;
+}
+a:visited {
+  color: purple;
+}
+a:hover {
+  color: aqua;
+  text-decoration: underline;
+}
+a:active {
+  color: red;
+}
+```
+
+Pseudo-classes aren't just for styling text links—they can be applied to any kind of selector (not just type selectors).
+
+## ID selectors
+
+- You can only have *one* element with the same ID per page
+- They require an `id` attribute on whatever HTML element you're trying to select.
+- The corresponding CSS selector must begin with a hash sign (`#`) opposed to a dot.
+
+```html
+<a id='button-2' class='button' href='nowhere.html'>Button Two</a>
+
+```
+
+```css
+#button-2 {
+  color: #5D6063;  /* Dark gray */
+}
+```
+
+### URL fragments
+
+- `id` attributes need to be unique because they serve as the target for “URL fragments”
+- Fragments are how you point the user to a specific part of a web page.
+
+![](images/fragment.png)
+
+```html
+<!-- From the same page -->
+<a href='#button-2'>Go to Button Two</a>
+
+<!-- From a different page -->
+<a href='selectors.html#button-2'>Go to Button Two</a>
+```
+
+## Specificity
+
+-  All else being equal, rules are applied from top-to-bottom.
+- Unfortunately, not all CSS selectors are created equal. 
+-  The whole "order matters”concept only works when all your rules have the same specificity.
+- Certain selectors will *always* override other ones, regardless of where they appear in the stylesheet.
